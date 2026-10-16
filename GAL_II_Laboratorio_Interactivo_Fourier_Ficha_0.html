@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAL II · Laboratorio interactivo · Fourier · Ficha 0</title>
+<style>
+:root{--ink:#182636;--blue:#1669ad;--gold:#c17d16;--line:#dce4eb;--muted:#536577}
+*{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.5 system-ui,Segoe UI,sans-serif}
+main{max-width:1000px;margin:auto;padding:24px 18px 60px}header{padding:24px 0 12px}small,.eyebrow{letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;font-size:12px}h1{font-size:clamp(26px,4vw,39px);line-height:1.12;margin:8px 0}h2{font-size:23px;margin:0 0 8px}h3{font-size:17px;margin:0 0 6px}p{margin:8px 0 14px}.intro{max-width:780px;color:var(--muted)}nav{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 22px}button,select{font:inherit;border:1px solid #b8c8d6;background:white;border-radius:9px;padding:9px 13px;color:var(--ink);cursor:pointer}button:hover{border-color:var(--blue)}nav button.active{background:var(--blue);color:white;border-color:var(--blue)}
+section{display:none;background:white;border:1px solid var(--line);border-radius:16px;padding:clamp(17px,3vw,28px);box-shadow:0 4px 16px #1c3d5710}section.active{display:block}.plot{width:100%;display:block;background:#fbfdff;border:1px solid var(--line);border-radius:12px;margin:15px 0 12px;touch-action:pan-y}
+.controls{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:12px 0}.controls label{font-weight:600}input[type=range]{width:min(300px,75vw);accent-color:var(--blue)}.value{font-weight:800;color:var(--blue);font-size:20px}
+.formula{background:#f1f6fb;border-radius:10px;padding:12px 15px;font:18px/1.8 Georgia,serif;overflow:auto}.prompt{border-left:4px solid var(--gold);background:#fffaf0;padding:12px 16px;margin:16px 0}.prompt strong{display:block;margin-bottom:4px}.result{color:#124b77;font-weight:600;min-height:27px}
+details{border-top:1px solid var(--line);margin-top:17px;padding-top:13px}summary{cursor:pointer;font-weight:650}footer{margin-top:24px;color:var(--muted);font-size:13px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.chip{display:inline-block;background:#edf5fb;color:#195781;padding:4px 10px;border-radius:30px;font-size:13px;font-weight:700}
+@media(max-width:620px){.twocol{grid-template-columns:1fr}main{padding:15px 10px 40px}nav button{font-size:13px;padding:8px 9px}}
+</style></head><body><main>
+<header><div class="eyebrow">GAL II · Tema 2 · Series de Fourier</div><h1>Laboratorio interactivo · Ficha 0</h1><p class="intro">Herramientas previas: periodicidad, seno y coseno, integrales, paridad, producto interno y primera idea de ortogonalidad. Explora, anticipa y justifica antes de abrir cada conclusión.</p><span class="chip">Funciona sin conexión a Internet</span></header>
+<nav id="tabs" aria-label="Actividades">
+<button class="active" data-tab="a1">1 · Período</button><button data-tab="a2">2 · Frecuencia</button><button data-tab="a3">3 · Integral</button><button data-tab="a4">4 · Paridad</button><button data-tab="a5">5 · Producto interno</button><button data-tab="a6">6 · Síntesis</button></nav>
+<section id="a1" class="active"><small>Exploración 1</small><h2>¿Qué significa que una función sea periódica?</h2><p>Modifica <em>n</em> y observa la gráfica de <em>f(x) = sen(nx)</em> en [0, 2π]. El tramo resaltado representa un período fundamental.</p>
+<svg class="plot" id="p1" viewBox="0 0 740 270" role="img" aria-label="Gráfica de seno con período destacado"></svg>
+<div class="controls"><label for="n1">Valor de n</label><input id="n1" type="range" min="1" max="8" value="1" step="1"><span class="value" id="n1v">1</span></div>
+<div class="formula" id="periodResult"></div><div class="prompt"><strong>Antes de responder</strong>Si duplicas n, ¿qué ocurre con el período? ¿Cuántas oscilaciones completas aparecen entre 0 y 2π?</div>
+<details><summary>Ver conclusión matemática</summary><p>Una función es periódica si f(x + T) = f(x), con T &gt; 0. Para n natural positivo, sen(nx) tiene período fundamental T = 2π/n; en [0, 2π] realiza n oscilaciones completas.</p></details></section>
+<section id="a2"><small>Exploración 2</small><h2>Seno, coseno y frecuencia angular</h2><p>Compara seno y coseno y cambia la frecuencia angular ω. Interpreta el eje horizontal como tiempo en segundos.</p>
+<svg class="plot" id="p2" viewBox="0 0 740 270" role="img" aria-label="Gráfica de función trigonométrica según frecuencia"></svg>
+<div class="controls"><label for="kind2">Función</label><select id="kind2"><option value="sin">sen(ωt)</option><option value="cos">cos(ωt)</option></select><label for="w2">ω</label><input id="w2" type="range" min="1" max="10" step="1" value="2"><span class="value" id="w2v">2</span></div>
+<div class="formula" id="freqResult"></div><div class="prompt"><strong>Indaga</strong>¿La amplitud cambia al aumentar ω? ¿Qué relación existe entre la frecuencia angular, el período y la frecuencia ordinaria?</div>
+<details><summary>Ver conclusión matemática</summary><p>ω = 2π/T y f = 1/T = ω/(2π). Si t está en segundos, ω se mide en rad/s, T en segundos y f en Hz. La amplitud de sen(ωt) y cos(ωt) es 1.</p></details></section>
+<section id="a3"><small>Exploración 3</small><h2>Integral definida: área con signo</h2><p>Elige una función y observa las regiones positivas y negativas en [−π, π]. La integral representa el área algebraica, no el área geométrica total.</p>
+<svg class="plot" id="p3" viewBox="0 0 740 270" role="img" aria-label="Áreas con signo de una función trigonométrica"></svg>
+<div class="controls"><label for="kind3">Integrando</label><select id="kind3"><option value="sin">sen(x)</option><option value="cos">cos(x)</option><option value="one">1</option><option value="sinsq">sen²(x)</option><option value="sincos">sen(x)cos(x)</option></select></div>
+<div class="formula" id="integralResult"></div><div class="prompt"><strong>Anticipa</strong>¿Qué regiones se compensan? ¿Una integral igual a cero significa necesariamente que la función es nula?</div>
+<details><summary>Ver herramientas de cálculo</summary><p>∫ sen(x) dx = −cos(x) + C; ∫ cos(x) dx = sen(x) + C; ∫ sen²(x) dx = x/2 − sen(2x)/4 + C; ∫ cos²(x) dx = x/2 + sen(2x)/4 + C; ∫ sen(x)cos(x) dx = sen²(x)/2 + C.</p><p>La integral es lineal: ∫(αf + βg) = α∫f + β∫g (con los mismos límites). Por el teorema fundamental, ∫ₐᵇ f(x)dx = F(b) − F(a), si F es una primitiva adecuada.</p></details></section>
+<section id="a4"><small>Exploración 4</small><h2>Funciones pares e impares</h2><p>Observa la simetría entre la mitad izquierda y la derecha. La línea punteada es el reflejo de la parte derecha respecto del eje vertical.</p>
+<svg class="plot" id="p4" viewBox="0 0 740 270" role="img" aria-label="Simetría de una función respecto del eje vertical"></svg>
+<div class="controls"><label for="kind4">Función</label><select id="kind4"><option value="cos">cos(x)</option><option value="sin">sen(x)</option><option value="x2">x²/π²</option><option value="x3">x³/π³</option><option value="xp1">x/π + 1</option><option value="xsin">x sen(x)/π</option></select></div>
+<div class="formula" id="parityResult"></div><div class="prompt"><strong>Comprueba</strong>Compara f(−x) con f(x) y con −f(x). ¿Qué permite deducir la paridad sobre una integral en [−π, π]?</div>
+<details><summary>Ver conclusión matemática</summary><p>Par: f(−x) = f(x); impar: f(−x) = −f(x). En [−a,a], la integral de una función impar integrable es 0. Para una función par integrable, ∫₋ₐᵃ f(x)dx = 2∫₀ᵃ f(x)dx. El producto de dos funciones impares es par.</p></details></section>
+<section id="a5"><small>Exploración 5</small><h2>Producto interno y ortogonalidad</h2><p>Elige dos funciones. La curva azul es su producto: la integral de esa curva determina el producto interno normalizado.</p>
+<svg class="plot" id="p5" viewBox="0 0 740 270" role="img" aria-label="Producto de dos funciones y área con signo"></svg>
+<div class="controls"><label for="f5">f(x)</label><select id="f5"><option value="one">1</option><option value="sin">sen(x)</option><option value="cos">cos(x)</option><option value="sin2">sen(2x)</option></select><label for="g5">g(x)</label><select id="g5"><option value="sin">sen(x)</option><option value="cos">cos(x)</option><option value="one">1</option><option value="sin2">sen(2x)</option></select></div>
+<div class="formula">⟨f, g⟩ = (1/π) ∫₋π^π f(x)g(x) dx</div><p class="result" id="innerResult"></p>
+<div class="prompt"><strong>Reflexiona</strong>Antes de mirar el resultado, determina la paridad del producto. ¿Que ⟨f,g⟩ sea cero implica que alguna de las funciones sea cero?</div>
+<details><summary>Ver conclusión matemática</summary><p>Dos funciones son ortogonales si ⟨f,g⟩ = 0. Es una generalización de la perpendicularidad de vectores. La paridad puede simplificar el cálculo: un producto impar tiene integral cero en [−π,π]. El estudio sistemático de la ortogonalidad de senos y cosenos continúa en la Ficha Teórica 2.</p></details></section>
+<section id="a6"><small>Actividad de cierre</small><h2>Integra lo aprendido</h2><p>Considera f(x) = sen(3x). Responde primero sin usar los controles anteriores.</p>
+<ol><li>¿Es periódica? Determina su período fundamental.</li><li>¿Cuántas oscilaciones realiza en [0, 2π]?</li><li>¿Es par o impar? Justifica calculando f(−x).</li><li>¿Cuál es el valor de ∫₋π^π f(x)dx? Justifica sin calcular primitivas.</li><li>¿Qué puedes afirmar sobre ⟨1, f⟩?</li></ol>
+<details><summary>Comprobar respuestas</summary><p>Su período fundamental es 2π/3; realiza 3 oscilaciones. Es impar, porque sen(−3x) = −sen(3x). Su integral en [−π,π] es cero por paridad; en consecuencia, ⟨1, sen(3x)⟩ = 0.</p></details>
+<div class="prompt"><strong>Conexión con Fourier</strong>La periodicidad, las integrales y la ortogonalidad preparan el camino para representar funciones periódicas mediante senos y cosenos.</div></section>
+<footer>Material didáctico complementario de la Ficha Teórica 0 · GAL II · Ingeniería Electrotecnia. Uso en aula y estudio autónomo.</footer>
+</main><script>
+const PI=Math.PI, colors={blue:'#1669ad',gold:'#c17d16',pos:'#c5e3f6',neg:'#f6dfba'};
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('section').forEach(s=>s.classList.toggle('active',s.id===b.dataset.tab));document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));}));
+function v(id){return document.getElementById(id).value}function el(id){return document.getElementById(id)}
+function fmt(n){return Math.abs(n)<1e-8?'0':n.toFixed(3).replace(/0+$/,'').replace(/\.$/,'')}
+function plot(id,fn,opts={}){let svg=el(id),W=740,H=270,L=55,R=18,T=18,B=36,xmin=opts.xmin??-PI,xmax=opts.xmax??PI,ymax=opts.ymax??1.45, ymin=opts.ymin??-1.45,xx=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R),yy=y=>T+(ymax-y)/(ymax-ymin)*(H-T-B);let parts=[];
+for(let y=-1;y<=1;y++){parts.push(`<line x1="${L}" x2="${W-R}" y1="${yy(y)}" y2="${yy(y)}" stroke="${y===0?'#7b90a2':'#dce4eb'}" stroke-width="${y===0?1.5:1}"/><text x="${L-10}" y="${yy(y)+4}" text-anchor="end" font-size="13" fill="#536577">${y}</text>`)}
+let ticks=opts.xmin===0?[[0,'0'],[PI/2,'π/2'],[PI,'π'],[3*PI/2,'3π/2'],[2*PI,'2π']]:[[-PI,'−π'],[-PI/2,'−π/2'],[0,'0'],[PI/2,'π/2'],[PI,'π']];
+for(let [x,label] of ticks)parts.push(`<line x1="${xx(x)}" x2="${xx(x)}" y1="${T}" y2="${H-B}" stroke="#dce4eb"/><text x="${xx(x)}" y="${H-12}" font-size="13" fill="#536577" text-anchor="middle">${label}</text>`);
+let N=600;
+if(opts.fill){for(let i=0;i<N;i++){let x=xmin+(xmax-xmin)*i/N,x2=xmin+(xmax-xmin)*(i+1)/N,y=fn((x+x2)/2),cy=yy(0);parts.push(`<rect x="${xx(x)}" y="${Math.min(yy(y),cy)}" width="${Math.max(1.1,xx(x2)-xx(x)+.3)}" height="${Math.abs(yy(y)-cy)}" fill="${y>=0?colors.pos:colors.neg}" opacity=".8"/>`)}}
+if(opts.highlight){let a=xx(0),b=xx(opts.highlight);parts.push(`<rect x="${a}" y="${T}" width="${b-a}" height="${H-B-T}" fill="#f4c879" opacity=".24"/>`)}
+let d='';for(let i=0;i<=N;i++){let x=xmin+(xmax-xmin)*i/N,y=Math.max(ymin,Math.min(ymax,fn(x)));d+=(i?'L':'M')+xx(x).toFixed(2)+','+yy(y).toFixed(2)}
+parts.push(`<path d="${d}" stroke="${colors.blue}" stroke-width="3" fill="none" stroke-linejoin="round"/>`);
+if(opts.mirror){let m='';for(let i=0;i<=300;i++){let x=-PI+PI*i/300;m+=(i?'L':'M')+xx(x).toFixed(2)+','+yy(fn(-x)).toFixed(2)}parts.push(`<path d="${m}" stroke="${colors.gold}" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>`)}
+svg.innerHTML=parts.join('')}
+function update1(){let n=+v('n1');el('n1v').textContent=n;plot('p1',x=>Math.sin(n*x),{xmin:0,xmax:2*PI,highlight:2*PI/n});el('periodResult').textContent=`f(x) = sen(${n===1?'':n}x)   ·   T = 2π/${n}   ·   Oscilaciones = ${n}`}
+function update2(){let w=+v('w2'),k=v('kind2');el('w2v').textContent=w;plot('p2',x=>Math[k](w*x),{xmin:0,xmax:2*PI});el('freqResult').textContent=`ω = ${w} rad/s   ·   T = 2π/${w} s   ·   f = ${w}/(2π) Hz`}
+const fns={sin:x=>Math.sin(x),cos:x=>Math.cos(x),one:x=>1,sinsq:x=>Math.sin(x)**2,sincos:x=>Math.sin(x)*Math.cos(x),x2:x=>(x/PI)**2,x3:x=>(x/PI)**3,xp1:x=>x/PI+1,xsin:x=>x*Math.sin(x)/PI,sin2:x=>Math.sin(2*x)};
+const labels={sin:'sen(x)',cos:'cos(x)',one:'1',sinsq:'sen²(x)',sincos:'sen(x)cos(x)',x2:'x²/π²',x3:'x³/π³',xp1:'x/π + 1',xsin:'x sen(x)/π',sin2:'sen(2x)'};
+const integrals={sin:'0',cos:'0',one:'2π',sinsq:'π',sincos:'0'};
+function update3(){let k=v('kind3');plot('p3',fns[k],{fill:true});el('integralResult').textContent=`∫₋π^π ${labels[k]} dx = ${integrals[k]}`}
+const parities={sin:'Impar',cos:'Par',x2:'Par',x3:'Impar',xp1:'Ni par ni impar',xsin:'Par'};
+function update4(){let k=v('kind4');plot('p4',fns[k],{mirror:true,ymax:k==='xp1'?2.4:1.45,ymin:-1.45});el('parityResult').textContent=`f(x) = ${labels[k]}   ·   Clasificación: ${parities[k]}`}
+function inner(f,g){let N=2400,h=2*PI/N,s=0;for(let i=0;i<=N;i++){let x=-PI+i*h;s+=(i===0||i===N?.5:1)*f(x)*g(x)}return s*h/PI}
+function update5(){let a=v('f5'),b=v('g5'),prod=x=>fns[a](x)*fns[b](x),val=inner(fns[a],fns[b]);plot('p5',prod,{fill:true});el('innerResult').textContent=`⟨${labels[a]}, ${labels[b]}⟩ = ${Math.abs(val)<1e-8?'0':fmt(val)} · ${Math.abs(val)<1e-8?'Son ortogonales':'No son ortogonales'}`}
+for(let [id,fn] of [['n1',update1],['w2',update2],['kind2',update2],['kind3',update3],['kind4',update4],['f5',update5],['g5',update5]])el(id).addEventListener('input',fn);
+update1();update2();update3();update4();update5();
+</script></body></html>
